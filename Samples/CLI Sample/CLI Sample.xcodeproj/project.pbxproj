@@ -16,7 +16,6 @@
 		45DF31D11272EBC900C72889 /* CCouchDBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31C21272EBC900C72889 /* CCouchDBServer.m */; };
 		45DF31D21272EBC900C72889 /* CCouchDBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31C41272EBC900C72889 /* CCouchDBSession.m */; };
 		45DF31D31272EBC900C72889 /* CCouchDBURLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31C61272EBC900C72889 /* CCouchDBURLOperation.m */; };
-		45DF31D41272EBC900C72889 /* CCouchDBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31C81272EBC900C72889 /* CCouchDBView.m */; };
 		45DF31D51272EBC900C72889 /* CouchDBClientConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31CA1272EBC900C72889 /* CouchDBClientConstants.m */; };
 		45DF31D61272EBC900C72889 /* NSError_CouchDBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31CD1272EBC900C72889 /* NSError_CouchDBExtensions.m */; };
 		45DF33821272EC0D00C72889 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF330D1272EC0D00C72889 /* CDataScanner.m */; };
@@ -37,6 +36,8 @@
 		45DF35311272EC8900C72889 /* NSDate_InternetDateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF352C1272EC8900C72889 /* NSDate_InternetDateExtensions.m */; };
 		45DF35321272EC8900C72889 /* NSDateFormatter_InternetDateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF352E1272EC8900C72889 /* NSDateFormatter_InternetDateExtensions.m */; };
 		45DF35B81272F10100C72889 /* CContinuousURLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF35B71272F10100C72889 /* CContinuousURLOperation.m */; };
+		45EAA63712A2F840001D161F /* CCouchDBChangeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EAA63612A2F840001D161F /* CCouchDBChangeSet.m */; };
+		45EAA63C12A2F84D001D161F /* CCouchDBDesignDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EAA63B12A2F84D001D161F /* CCouchDBDesignDocument.m */; };
 		8DD76F9A0486AA7600D96B5E /* CLI Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* CLI Sample.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -75,8 +76,6 @@
 		45DF31C41272EBC900C72889 /* CCouchDBSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCouchDBSession.m; sourceTree = "<group>"; };
 		45DF31C51272EBC900C72889 /* CCouchDBURLOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCouchDBURLOperation.h; sourceTree = "<group>"; };
 		45DF31C61272EBC900C72889 /* CCouchDBURLOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCouchDBURLOperation.m; sourceTree = "<group>"; };
-		45DF31C71272EBC900C72889 /* CCouchDBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCouchDBView.h; sourceTree = "<group>"; };
-		45DF31C81272EBC900C72889 /* CCouchDBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCouchDBView.m; sourceTree = "<group>"; };
 		45DF31C91272EBC900C72889 /* CouchDBClientConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchDBClientConstants.h; sourceTree = "<group>"; };
 		45DF31CA1272EBC900C72889 /* CouchDBClientConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchDBClientConstants.m; sourceTree = "<group>"; };
 		45DF31CB1272EBC900C72889 /* CouchDBClientTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchDBClientTypes.h; sourceTree = "<group>"; };
@@ -120,6 +119,10 @@
 		45DF352E1272EC8900C72889 /* NSDateFormatter_InternetDateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateFormatter_InternetDateExtensions.m; sourceTree = "<group>"; };
 		45DF35B61272F10100C72889 /* CContinuousURLOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CContinuousURLOperation.h; sourceTree = "<group>"; };
 		45DF35B71272F10100C72889 /* CContinuousURLOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CContinuousURLOperation.m; sourceTree = "<group>"; };
+		45EAA63512A2F840001D161F /* CCouchDBChangeSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCouchDBChangeSet.h; sourceTree = "<group>"; };
+		45EAA63612A2F840001D161F /* CCouchDBChangeSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCouchDBChangeSet.m; sourceTree = "<group>"; };
+		45EAA63A12A2F84D001D161F /* CCouchDBDesignDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCouchDBDesignDocument.h; sourceTree = "<group>"; };
+		45EAA63B12A2F84D001D161F /* CCouchDBDesignDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCouchDBDesignDocument.m; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* CLI Sample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CLI Sample"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -184,7 +187,7 @@
 				45DF31E41272EC0C00C72889 /* TouchJSON */,
 			);
 			name = Externals;
-			path = ../../Externals;
+			path = ../Externals;
 			sourceTree = "<group>";
 		};
 		45DF31BA1272EBC900C72889 /* Source */ = {
@@ -192,8 +195,12 @@
 			children = (
 				45DF31BB1272EBC900C72889 /* CCouchDBAttachment.h */,
 				45DF31BC1272EBC900C72889 /* CCouchDBAttachment.m */,
+				45EAA63512A2F840001D161F /* CCouchDBChangeSet.h */,
+				45EAA63612A2F840001D161F /* CCouchDBChangeSet.m */,
 				45DF31BD1272EBC900C72889 /* CCouchDBDatabase.h */,
 				45DF31BE1272EBC900C72889 /* CCouchDBDatabase.m */,
+				45EAA63A12A2F84D001D161F /* CCouchDBDesignDocument.h */,
+				45EAA63B12A2F84D001D161F /* CCouchDBDesignDocument.m */,
 				45DF31BF1272EBC900C72889 /* CCouchDBDocument.h */,
 				45DF31C01272EBC900C72889 /* CCouchDBDocument.m */,
 				45DF31C11272EBC900C72889 /* CCouchDBServer.h */,
@@ -202,8 +209,6 @@
 				45DF31C41272EBC900C72889 /* CCouchDBSession.m */,
 				45DF31C51272EBC900C72889 /* CCouchDBURLOperation.h */,
 				45DF31C61272EBC900C72889 /* CCouchDBURLOperation.m */,
-				45DF31C71272EBC900C72889 /* CCouchDBView.h */,
-				45DF31C81272EBC900C72889 /* CCouchDBView.m */,
 				45DF31C91272EBC900C72889 /* CouchDBClientConstants.h */,
 				45DF31CA1272EBC900C72889 /* CouchDBClientConstants.m */,
 				45DF31CB1272EBC900C72889 /* CouchDBClientTypes.h */,
@@ -397,7 +402,6 @@
 				45DF31D11272EBC900C72889 /* CCouchDBServer.m in Sources */,
 				45DF31D21272EBC900C72889 /* CCouchDBSession.m in Sources */,
 				45DF31D31272EBC900C72889 /* CCouchDBURLOperation.m in Sources */,
-				45DF31D41272EBC900C72889 /* CCouchDBView.m in Sources */,
 				45DF31D51272EBC900C72889 /* CouchDBClientConstants.m in Sources */,
 				45DF31D61272EBC900C72889 /* NSError_CouchDBExtensions.m in Sources */,
 				45DF33821272EC0D00C72889 /* CDataScanner.m in Sources */,
@@ -420,6 +424,8 @@
 				45DF35B81272F10100C72889 /* CContinuousURLOperation.m in Sources */,
 				4530628512A184D700B99DFA /* CJSONSerializedData.m in Sources */,
 				4530628A12A184E400B99DFA /* CTemporaryFile.m in Sources */,
+				45EAA63712A2F840001D161F /* CCouchDBChangeSet.m in Sources */,
+				45EAA63C12A2F84D001D161F /* CCouchDBDesignDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
