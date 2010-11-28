@@ -179,7 +179,7 @@
 
 - (CURLOperation *)operationToFetchAllDocumentsWithOptions:(NSDictionary *)inOptions withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
 	{
-	return([self operationToBulkFetchDocuments:NULL options:NULL successHandler:inSuccessHandler failureHandler:inFailureHandler]);
+	return([self operationToBulkFetchDocuments:NULL options:inOptions successHandler:inSuccessHandler failureHandler:inFailureHandler]);
 	}
 
 - (CURLOperation *)operationToFetchDocumentForIdentifier:(NSString *)inIdentifier options:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
