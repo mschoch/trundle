@@ -103,7 +103,7 @@
 
 - (CURLOperation *)operationToCreateDocument:(NSDictionary *)inDocument successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 	{
-	NSMutableURLRequest *theRequest = [self.session requestWithURL:self.URL];
+	NSMutableURLRequest *theRequest = [self.server requestWithURL:self.URL];
 	theRequest.HTTPMethod = @"POST";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 
@@ -145,7 +145,7 @@
 - (CURLOperation *)operationToCreateDocument:(NSDictionary *)inDocument identifier:(NSString *)inIdentifier successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
 	{
 	NSURL *theURL = [[self.URL absoluteURL] URLByAppendingPathComponent:inIdentifier];
-	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
 	theRequest.HTTPMethod = @"PUT";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 
@@ -185,7 +185,7 @@
 - (CURLOperation *)operationToFetchDocumentForIdentifier:(NSString *)inIdentifier options:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
 	{
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:inIdentifier];
-	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
 	theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
@@ -206,7 +206,7 @@
 	{
 	// TODO -- this only fetches the latest document (i.e. _rev is ignored). What if we don't want the latest document?
 	NSURL *theURL = inDocument.URL;
-	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
 	theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
@@ -226,7 +226,7 @@
 - (CURLOperation *)operationToUpdateDocument:(CCouchDBDocument *)inDocument successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
 	{
 	NSURL *theURL = inDocument.URL;
-	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
 	theRequest.HTTPMethod = @"PUT";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	NSData *theData = [self.session.serializer serializeDictionary:inDocument.content error:NULL];
@@ -254,7 +254,7 @@
 		NSURL *theURL = [NSURL URLWithString:urlString];
 
 		[inDocument.URL URLByAppendingPathComponent:[NSString stringWithFormat:@"?rev=%@", inDocument.revision]];
-		NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+		NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
 		theRequest.HTTPMethod = @"DELETE";
 		[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 		CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
@@ -274,7 +274,7 @@
 		{
 		theURL = [NSURL URLWithRoot:theURL queryDictionary:inOptions];
 		}
-    NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+    NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
     theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 
@@ -293,7 +293,7 @@
 - (CURLOperation *)operationToBulkCreateDocuments:(id)inDocuments successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
     {
     NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_bulk_docs"];
-    NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+    NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
     theRequest.HTTPMethod = @"POST";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 
@@ -343,7 +343,7 @@
 		theURL = [NSURL URLWithRoot:theURL queryDictionary:inOptions];
 		}
 
-	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 
 	if (inDocuments.count == 0)

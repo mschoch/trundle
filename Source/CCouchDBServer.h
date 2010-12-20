@@ -22,12 +22,15 @@
 
 @property (readonly, retain) CCouchDBSession *session;
 @property (readonly, retain) NSURL *URL;
+@property (readwrite, retain) NSURLCredential *URLCredential;
 @property (readonly, retain) NSSet *databases;
 
 - (id)init;
 - (id)initWithSession:(CCouchDBSession *)inSession URL:(NSURL *)inURL;
 
 - (CCouchDBDatabase *)databaseNamed:(NSString *)inName;
+
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)inURL;
 
 - (CURLOperation *)operationToCreateDatabaseNamed:(NSString *)inName withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 - (CURLOperation *)operationToFetchDatabasesWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;

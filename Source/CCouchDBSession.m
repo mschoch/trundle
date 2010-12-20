@@ -14,8 +14,6 @@
 #import "CJSONDeserializer.h"
 #import "CJSONSerializedData.h"
 
-#import "NSData_Base64Extensions.h"
-
 @implementation CCouchDBSession
 
 @synthesize operationQueue;
@@ -93,13 +91,6 @@
 - (NSMutableURLRequest *)requestWithURL:(NSURL *)inURL
 	{
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:inURL];
-	
-//	NSString *theValue = @"username:password";
-//	NSData *theData = [theValue dataUsingEncoding:NSUTF8StringEncoding];
-//	theValue = [theData asBase64EncodedString:0];
-//	theValue = [NSString stringWithFormat:@"Basic %@", theValue];
-//	[theRequest setValue:theValue forHTTPHeaderField:@"Authorization"];
-	
 	return(theRequest);
 	}
 

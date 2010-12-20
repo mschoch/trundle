@@ -55,6 +55,11 @@
     return([self.database.URL URLByAppendingPathComponent:[NSString stringWithFormat:@"_design/%@", self.identifier]]);
     }
 
+- (CCouchDBServer *)server
+    {
+    return(self.database.server);
+    }
+
 - (CCouchDBSession *)session
     {
     return(self.database.server.session);
@@ -71,7 +76,7 @@
         theURL = [NSURL URLWithRoot:theURL queryDictionary:inOptions];
         }
 
-    NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+    NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
     theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
     CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];

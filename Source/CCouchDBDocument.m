@@ -187,6 +187,11 @@ return(self);
 
 #pragma mark -
 
+- (CCouchDBServer *)server
+    {
+    return(self.database.server);
+    }
+
 - (CCouchDBSession *)session
     {
     return(self.database.server.session);
@@ -219,7 +224,7 @@ return(self);
     {
     NSURL *theURL = [[self.URL absoluteURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@?rev=%@", inAttachment.identifier, self.revision]];
 
-    NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
+    NSMutableURLRequest *theRequest = [self.server requestWithURL:theURL];
     theRequest.HTTPMethod = @"PUT";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
     [theRequest setValue:inAttachment.contentType forHTTPHeaderField:@"Content-Type"];
