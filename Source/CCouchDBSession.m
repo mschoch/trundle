@@ -88,6 +88,13 @@
 
 #pragma mark -
 
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)inURL
+	{
+	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:inURL];
+	
+	return(theRequest);
+	}
+
 - (id)URLOperationWithRequest:(NSURLRequest *)inURLRequest;
     {
     return([[[[self URLOperationClass] alloc] initWithSession:self request:inURLRequest] autorelease]);
