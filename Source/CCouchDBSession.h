@@ -20,6 +20,7 @@
 @property (readwrite, nonatomic, retain) CJSONSerializer *serializer;
 @property (readwrite, nonatomic, retain) CJSONDeserializer *deserializer;
 
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)inURL;
 - (id)URLOperationWithRequest:(NSURLRequest *)inURLRequest;
 
 @end
