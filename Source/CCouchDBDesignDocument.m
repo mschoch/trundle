@@ -71,7 +71,7 @@
         theURL = [NSURL URLWithRoot:theURL queryDictionary:inOptions];
         }
 
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:theURL];
+    NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
     theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
     CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];

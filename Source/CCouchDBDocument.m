@@ -219,7 +219,7 @@ return(self);
     {
     NSURL *theURL = [[self.URL absoluteURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@?rev=%@", inAttachment.identifier, self.revision]];
 
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:theURL];
+    NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
     theRequest.HTTPMethod = @"PUT";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
     [theRequest setValue:inAttachment.contentType forHTTPHeaderField:@"Content-Type"];

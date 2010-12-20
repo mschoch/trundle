@@ -120,7 +120,7 @@
 	{
 	CCouchDBDatabase *theRemoteDatabase = [[[CCouchDBDatabase alloc] initWithServer:self name:inName] autorelease];
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:theRemoteDatabase.encodedName];
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
 	theRequest.HTTPMethod = @"PUT";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
@@ -139,7 +139,7 @@
 - (CURLOperation *)operationToFetchDatabasesWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
 	{
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_all_dbs"];
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
 	theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
@@ -169,7 +169,7 @@
 	{
 	CCouchDBDatabase *theRemoteDatabase = [[[CCouchDBDatabase alloc] initWithServer:self name:inName] autorelease];
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:theRemoteDatabase.encodedName];
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
 	theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
@@ -188,7 +188,7 @@
 - (CURLOperation *)operationToDeleteDatabase:(CCouchDBDatabase *)inDatabase withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 	{
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:inDatabase.encodedName];
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:theURL];
+	NSMutableURLRequest *theRequest = [self.session requestWithURL:theURL];
 	theRequest.HTTPMethod = @"DELETE";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
