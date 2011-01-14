@@ -11,7 +11,8 @@
 @interface CCouchDBChangeSet ()
 @property (readwrite, nonatomic, assign) NSInteger lastSequence;
 @property (readwrite, nonatomic, retain) NSSet *changedDocuments;
-@property (readwrite, nonatomic, retain) NSSet *deletedDocuments;
+@property (readwrite, nonatomic, retain) NSSet *changedDocumentIdentifiers;
+@property (readwrite, nonatomic, retain) NSSet *deletedDocumentsIdentifiers;
 
 - (BOOL)processJSON:(id)inJSON error:(NSError **)outError;
 @end
@@ -23,7 +24,8 @@
 @synthesize database;
 @synthesize lastSequence;
 @synthesize changedDocuments;
-@synthesize deletedDocuments;
+@synthesize changedDocumentIdentifiers;
+@synthesize deletedDocumentsIdentifiers;
 
 - (id)initWithDatabase:(CCouchDBDatabase *)inDatabase JSON:(id)inJSON
 	{
@@ -38,10 +40,10 @@
 - (void)dealloc
 	{
 	database = NULL;
-	[changedDocuments release];
-	changedDocuments = NULL;
-	[deletedDocuments release];
-	deletedDocuments = NULL;
+	[changedDocumentIdentifiers release];
+	changedDocumentIdentifiers = NULL;
+	[deletedDocumentsIdentifiers release];
+	deletedDocumentsIdentifiers = NULL;
 	//
 	[super dealloc];
 	}
@@ -50,7 +52,7 @@
 
 - (NSString *)description
 	{
-	return([NSString stringWithFormat:@"%@ (lastSequence: %d, changed: %@, deleted: %@)", [super description], self.lastSequence, self.changedDocuments, self.deletedDocuments]);
+	return([NSString stringWithFormat:@"%@ (lastSequence: %d, changed: %@, deleted: %@)", [super description], self.lastSequence, self.changedDocumentIdentifiers, self.deletedDocumentsIdentifiers]);
 	}
 
 - (BOOL)processJSON:(id)inJSON error:(NSError **)outError
@@ -59,8 +61,9 @@
 	NSSet *theDeletedDocuments = [theResults filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
 	[theResults minusSet:theDeletedDocuments];
 	
-	self.changedDocuments = [theResults valueForKey:@"id"];
-	self.deletedDocuments = [theDeletedDocuments valueForKey:@"id"];
+	self.changedDocumentIdentifiers = [theResults valueForKey:@"id"];
+	self.changedDocuments = [theResults valueForKey:@"doc"];
+	self.deletedDocumentsIdentifiers = [theDeletedDocuments valueForKey:@"id"];
 	self.lastSequence = [[inJSON objectForKey:@"last_seq"] integerValue];
 	
 	return(YES);

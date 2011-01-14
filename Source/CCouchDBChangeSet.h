@@ -13,14 +13,15 @@
 @interface CCouchDBChangeSet : NSObject {
 	CCouchDBDatabase *database;
 	NSInteger lastSequence;
-	NSSet *changedDocuments;
-	NSSet *deletedDocuments;
+	NSSet *changedDocumentIdentifiers;
+	NSSet *deletedDocumentsIdentifiers;
 }
 
 @property (readonly, nonatomic, assign) CCouchDBDatabase *database;
 @property (readonly, nonatomic, assign) NSInteger lastSequence;
 @property (readonly, nonatomic, retain) NSSet *changedDocuments;
-@property (readonly, nonatomic, retain) NSSet *deletedDocuments;
+@property (readonly, nonatomic, retain) NSSet *changedDocumentIdentifiers;
+@property (readonly, nonatomic, retain) NSSet *deletedDocumentsIdentifiers;
 
 - (id)initWithDatabase:(CCouchDBDatabase *)inDatabase JSON:(id)inJSON;
 
