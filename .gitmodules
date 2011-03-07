@@ -1,6 +1,6 @@
 [submodule "Samples/Externals/TouchJSON"]
 	path = Samples/Externals/TouchJSON
-	url = git://github.com/touchcode/TouchJSON.git
+	url = git://github.com/TouchCode/TouchJSON.git
 [submodule "Samples/Externals/TouchFoundation"]
 	path = Samples/Externals/TouchFoundation
-	url = git://github.com/touchcode/TouchFoundation.git
+	url = git://github.com/TouchCode/TouchFoundation.git
