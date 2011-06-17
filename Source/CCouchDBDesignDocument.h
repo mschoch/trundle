@@ -14,7 +14,7 @@
 @class CURLOperation;
 
 @interface CCouchDBDesignDocument : NSObject {
-    CCouchDBDatabase *database;
+    CCouchDBDatabase *__unsafe_unretained database;
     NSString *identifier;
 }
 

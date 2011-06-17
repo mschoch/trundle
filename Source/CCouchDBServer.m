@@ -51,24 +51,12 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
-		session = [inSession retain];
-		URL = [inURL retain];
+		session = inSession;
+		URL = inURL;
 		}
 	return(self);
 	}
 
-- (void)dealloc
-	{
-	session = NULL;
-
-	[URL release];
-	URL = NULL;
-	//
-	[databasesByName release];
-	databasesByName = NULL;
-	//
-	[super dealloc];
-	}
 
 #pragma mark -
 
@@ -110,7 +98,7 @@
 	CCouchDBDatabase *theDatabase = [self.databasesByName objectForKey:inName];
 	if (theDatabase == NULL)
 		{
-		theDatabase = [[[CCouchDBDatabase alloc] initWithServer:self name:inName] autorelease];
+		theDatabase = [[CCouchDBDatabase alloc] initWithServer:self name:inName];
 		[self.databasesByName setObject:theDatabase forKey:inName];
 		}
 	return(theDatabase);
@@ -140,7 +128,7 @@
 
 - (CURLOperation *)operationToCreateDatabaseNamed:(NSString *)inName withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 	{
-	CCouchDBDatabase *theRemoteDatabase = [[[CCouchDBDatabase alloc] initWithServer:self name:inName] autorelease];
+	CCouchDBDatabase *theRemoteDatabase = [[CCouchDBDatabase alloc] initWithServer:self name:inName];
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:theRemoteDatabase.encodedName];
 	NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
 	theRequest.HTTPMethod = @"PUT";
@@ -171,7 +159,7 @@
 			{
 			if ([self.databasesByName objectForKey:theName] == NULL)
 				{
-				CCouchDBDatabase *theDatabase = [[[CCouchDBDatabase alloc] initWithServer:self name:theName] autorelease];
+				CCouchDBDatabase *theDatabase = [[CCouchDBDatabase alloc] initWithServer:self name:theName];
 				[self willChangeValueForKey:@"databasesByName"];
 				[self.databasesByName setObject:theDatabase forKey:theName];
 				[self didChangeValueForKey:@"databasesByName"];
@@ -189,7 +177,7 @@
 
 - (CURLOperation *)operationToFetchDatabaseNamed:(NSString *)inName withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 	{
-	CCouchDBDatabase *theRemoteDatabase = [[[CCouchDBDatabase alloc] initWithServer:self name:inName] autorelease];
+	CCouchDBDatabase *theRemoteDatabase = [[CCouchDBDatabase alloc] initWithServer:self name:inName];
 	NSURL *theURL = [self.URL URLByAppendingPathComponent:theRemoteDatabase.encodedName];
 	NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
 	theRequest.HTTPMethod = @"GET";

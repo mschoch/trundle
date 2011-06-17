@@ -11,7 +11,7 @@
 @class CCouchDBDatabase;
 
 @interface CCouchDBChangeSet : NSObject {
-	CCouchDBDatabase *database;
+	CCouchDBDatabase *__unsafe_unretained database;
 	NSInteger lastSequence;
 	NSSet *changedDocumentIdentifiers;
 	NSSet *deletedDocumentsIdentifiers;

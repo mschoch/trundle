@@ -25,16 +25,9 @@
 	{
 	[operationQueue cancelAllOperations];
 	[operationQueue waitUntilAllOperationsAreFinished];
-	[operationQueue release];
-	operationQueue = NULL;
 	//
-	[serializer release];
-	serializer = NULL;
 	//
-	[deserializer release];
-	deserializer = NULL;
 	//
-	[super dealloc];
 	}
 
 #pragma mark -
@@ -63,15 +56,15 @@
 		{
 		CFilteringJSONSerializer *theSerializer = (id)[CFilteringJSONSerializer serializer];
 		theSerializer.convertersByName = [NSDictionary dictionaryWithObjectsAndKeys:
-			[[^(NSDate *inDate) { return((id)[inDate ISO8601String]); } copy] autorelease], @"date",
-			[[^(CJSONSerializedData *inObject) { return((id)inObject.data); } copy] autorelease], @"JSONSerializedData",
+			[^(NSDate *inDate) { return((id)[inDate ISO8601String]); } copy], @"date",
+			[^(CJSONSerializedData *inObject) { return((id)inObject.data); } copy], @"JSONSerializedData",
 			NULL];
 		theSerializer.tests = [NSSet setWithObjects:
-			[[^(id inObject) { return([inObject isKindOfClass:[NSDate class]] ? @"date" : NULL); } copy] autorelease],
-			[[^(id inObject) { return([inObject isKindOfClass:[CJSONSerializedData class]] ? @"JSONSerializedData" : NULL); } copy] autorelease],
+			[^(id inObject) { return([inObject isKindOfClass:[NSDate class]] ? @"date" : NULL); } copy],
+			[^(id inObject) { return([inObject isKindOfClass:[CJSONSerializedData class]] ? @"JSONSerializedData" : NULL); } copy],
 			NULL];
 			
-		serializer = [theSerializer retain];
+		serializer = theSerializer;
 		}
 	return(serializer);
 	}
@@ -81,7 +74,7 @@
 	if (deserializer == NULL) 
 		{
 		CJSONDeserializer *theDeserializer = [CJSONDeserializer deserializer];
-		deserializer = [theDeserializer retain];
+		deserializer = theDeserializer;
 		}
 	return(deserializer);
 	}
@@ -96,7 +89,7 @@
 
 - (id)URLOperationWithRequest:(NSURLRequest *)inURLRequest;
     {
-    return([[[[self URLOperationClass] alloc] initWithSession:self request:inURLRequest] autorelease]);
+    return([[[self URLOperationClass] alloc] initWithSession:self request:inURLRequest]);
     }
     
 @end

@@ -13,7 +13,7 @@
 @class CCouchDBSession;
 
 @interface CCouchDBURLOperation : CURLOperation {
-    CCouchDBSession *session;
+    CCouchDBSession *__unsafe_unretained session;
 	id JSON;
     CouchDBSuccessHandler successHandler;
     CouchDBFailureHandler failureHandler;

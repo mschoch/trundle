@@ -39,16 +39,11 @@
 	{
 	session = NULL;
 
-	[successHandler release];
 	successHandler = NULL;
 
-	[failureHandler release];
 	failureHandler = NULL;
 
-	[JSON release];
-	JSON = NULL;
 	//
-	[super dealloc];
 	}
 
 #pragma mark -

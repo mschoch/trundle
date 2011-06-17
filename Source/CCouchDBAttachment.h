@@ -11,7 +11,7 @@
 @class CCouchDBDocument;
 
 @interface CCouchDBAttachment : NSObject {
-    CCouchDBDocument *document;
+    CCouchDBDocument *__unsafe_unretained document;
     NSString *identifier;
 	NSString *contentType;
 	NSData *data;

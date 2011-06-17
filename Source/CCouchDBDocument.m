@@ -78,14 +78,9 @@ return(self);
 - (void)dealloc
     {
     database = NULL;
-    [identifier release];
     identifier = NULL;
-    [revision release];
     revision = NULL;
-    [content release];
-    content = NULL;
     //
-    [super dealloc];
     }
 
 #pragma mark -
@@ -117,7 +112,6 @@ return(self);
             {
             if (identifier != inIdentifier)
                 {
-                [identifier release];
                 identifier = [inIdentifier copy];
                 }
             }
@@ -125,7 +119,6 @@ return(self);
             {
             if (identifier != NULL)
                 {
-                [identifier release];
                 identifier = NULL;
                 }
 
@@ -156,7 +149,6 @@ return(self);
             {
             if (revision != inRevision)
                 {
-                [revision release];
                 revision = [inRevision copy];
                 }
             }
@@ -164,7 +156,6 @@ return(self);
             {
             if (revision != NULL)
                 {
-                [revision release];
                 revision = NULL;
                 }
 
@@ -177,7 +168,7 @@ return(self);
 
 - (NSString *)encodedIdentifier
     {
-    return([(NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self.identifier, NULL, CFSTR("/"), kCFStringEncodingUTF8) autorelease]);
+    return((NSString *)objc_retainedObject(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)objc_unretainedPointer(self.identifier), NULL, CFSTR("/"), kCFStringEncodingUTF8)));
     }
 
 - (NSURL *)URL

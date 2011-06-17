@@ -19,23 +19,12 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
-		identifier = [inIdentifier retain];
-		contentType = [inContentType retain];
-		data = [inData retain];
+		identifier = inIdentifier;
+		contentType = inContentType;
+		data = inData;
 		}
 	return(self);
 	}
 
-- (void)dealloc
-    {
-    [identifier release];
-    identifier = NULL;
-    [contentType release];
-    contentType = NULL;
-    [data release];
-    data = NULL;
-    //
-    [super dealloc];
-    }
 
 @end

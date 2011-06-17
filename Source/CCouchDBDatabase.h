@@ -16,7 +16,7 @@
 @class CCouchDBDesignDocument;
 
 @interface CCouchDBDatabase : NSObject {
-	CCouchDBServer *server;
+	CCouchDBServer *__unsafe_unretained server;
 	NSString *name;
 	NSString *encodedName;
 	NSURL *URL;

@@ -40,12 +40,7 @@
 - (void)dealloc
 	{
 	database = NULL;
-	[changedDocumentIdentifiers release];
-	changedDocumentIdentifiers = NULL;
-	[deletedDocumentsIdentifiers release];
-	deletedDocumentsIdentifiers = NULL;
 	//
-	[super dealloc];
 	}
 
 #pragma mark -

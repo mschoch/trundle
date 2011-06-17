@@ -41,12 +41,7 @@
 - (void)dealloc
 	{
 	server = NULL;
-	[name release];
-	name = NULL;
-	[designDocuments release];
-	designDocuments = NULL;
 	//
-	[super dealloc];
 	}
 	
 #pragma mark -
@@ -65,9 +60,9 @@
 		{
 		if (encodedName == NULL)
 			{
-			encodedName = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self.name, NULL, CFSTR("/"), kCFStringEncodingUTF8);
+			encodedName = (NSString *)objc_retainedObject(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)objc_unretainedPointer(self.name), NULL, CFSTR("/"), kCFStringEncodingUTF8));
 			}
-		return([[encodedName retain] autorelease]);
+		return(encodedName);
 		}
 	}
 
@@ -77,9 +72,9 @@
 		{
 		if (URL == NULL)
 			{
-			URL = [[self.server.URL URLByAppendingPathComponent:self.encodedName] retain];
+			URL = [self.server.URL URLByAppendingPathComponent:self.encodedName];
 			}
-		return([[URL retain] autorelease]);
+		return(URL);
 		}
 	}
 
@@ -90,7 +85,7 @@
 	CCouchDBDesignDocument *theDesignDocument = [self.designDocuments objectForKey:inName];
 	if (theDesignDocument == NULL)
 		{
-		theDesignDocument = [[[CCouchDBDesignDocument alloc] initWithDatabase:self identifier:inName] autorelease];
+		theDesignDocument = [[CCouchDBDesignDocument alloc] initWithDatabase:self identifier:inName];
 		[self.designDocuments setObject:theDesignDocument forKey:inName];
 		}
 	return(theDesignDocument);	
@@ -127,7 +122,7 @@
 		NSString *theIdentifier = [inParameter objectForKey:@"id"];
 		NSString *theRevision = [inParameter objectForKey:@"rev"];
 
-		CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:self identifier:theIdentifier revision:theRevision] autorelease];
+		CCouchDBDocument *theDocument = [[CCouchDBDocument alloc] initWithDatabase:self identifier:theIdentifier revision:theRevision];
 		[theDocument populateWithJSON:inDocument];
 
 		if (inSuccessHandler)
@@ -161,7 +156,7 @@
 
 		NSString *theRevision = [inParameter objectForKey:@"rev"];
 
-		CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:self identifier:inIdentifier revision:theRevision] autorelease];
+		CCouchDBDocument *theDocument = [[CCouchDBDocument alloc] initWithDatabase:self identifier:inIdentifier revision:theRevision];
 		[theDocument populateWithJSON:inDocument];
 
 		if (inSuccessHandler)
@@ -186,7 +181,7 @@
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
 	theOperation.successHandler = ^(id inParameter) {
-		CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:self] autorelease];
+		CCouchDBDocument *theDocument = [[CCouchDBDocument alloc] initWithDatabase:self];
 
 		[theDocument populateWithJSON:inParameter];
 
@@ -274,9 +269,9 @@
     theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
 
-    CCouchDBURLOperation *theOperation = [[[CCouchDBURLOperation alloc] initWithSession:self.session request:theRequest] autorelease];
+    CCouchDBURLOperation *theOperation = [[CCouchDBURLOperation alloc] initWithSession:self.session request:theRequest];
     theOperation.successHandler = ^(id inParameter) {
-		CCouchDBChangeSet *theChangeSet = [[[CCouchDBChangeSet alloc] initWithDatabase:self JSON:inParameter] autorelease];
+		CCouchDBChangeSet *theChangeSet = [[CCouchDBChangeSet alloc] initWithDatabase:self JSON:inParameter];
 
         if (inSuccessHandler)
             inSuccessHandler(theChangeSet);
@@ -374,7 +369,7 @@
 			NSDictionary *doc = [theRow objectForKey:@"doc"];
 			if (doc)
 				{
-				CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:self] autorelease];
+				CCouchDBDocument *theDocument = [[CCouchDBDocument alloc] initWithDatabase:self];
 				[theDocument populateWithJSON:doc];
 
 				[theDocuments addObject:theDocument];
@@ -383,7 +378,7 @@
 				{
 				NSString *theIdentifier = [theRow objectForKey:@"id"];
 
-				CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:self identifier:theIdentifier] autorelease];
+				CCouchDBDocument *theDocument = [[CCouchDBDocument alloc] initWithDatabase:self identifier:theIdentifier];
 				theDocument.revision = [theRow valueForKeyPath:@"value.rev"];
 
 				[theDocuments addObject:theDocument];
