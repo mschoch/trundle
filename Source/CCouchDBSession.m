@@ -61,7 +61,7 @@
 	{
 	if (serializer == NULL) 
 		{
-		CFilteringJSONSerializer *theSerializer = [CFilteringJSONSerializer serializer];
+		CFilteringJSONSerializer *theSerializer = (id)[CFilteringJSONSerializer serializer];
 		theSerializer.convertersByName = [NSDictionary dictionaryWithObjectsAndKeys:
 			[[^(NSDate *inDate) { return((id)[inDate ISO8601String]); } copy] autorelease], @"date",
 			[[^(CJSONSerializedData *inObject) { return((id)inObject.data); } copy] autorelease], @"JSONSerializedData",

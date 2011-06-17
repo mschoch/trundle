@@ -51,11 +51,6 @@
 	
 #pragma mark -
 
-- (NSString *)description
-	{
-	return([NSString stringWithFormat:@"%@ (rc:%d, %@)", [super description], self.retainCount, self.name]);
-	}
-
 - (CCouchDBSession *)session
 	{
 	NSAssert(self.server.session != NULL, @"No session!");
@@ -112,11 +107,12 @@
 	[theRequest setHTTPBody:theData];
 
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    __block CCouchDBURLOperation *__theOperation = theOperation;
 	theOperation.successHandler = ^(id inParameter) {
-		if (theOperation.error)
+		if (__theOperation.error)
 			{
 			if (inFailureHandler)
-				inFailureHandler(theOperation.error);
+				inFailureHandler(__theOperation.error);
 			return;
 			}
 
@@ -137,9 +133,9 @@
 		if (inSuccessHandler)
 			inSuccessHandler(theDocument);
 		};
-	theOperation.failureHandler = inFailureHandler;
+	__theOperation.failureHandler = inFailureHandler;
 
-	return(theOperation);
+	return(__theOperation);
 	}
 
 - (CURLOperation *)operationToCreateDocument:(NSDictionary *)inDocument identifier:(NSString *)inIdentifier successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
@@ -306,11 +302,12 @@
     [theRequest setHTTPBody:theData];
 
     CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    __block CCouchDBURLOperation *__theOperation = theOperation;
     theOperation.successHandler = ^(id inParameter) {
-        if (theOperation.error)
+        if (__theOperation.error)
             {
             if (inFailureHandler)
-                inFailureHandler(theOperation.error);
+                inFailureHandler(__theOperation.error);
             return;
             }
 
@@ -323,10 +320,10 @@
 //            }
 
         if (inSuccessHandler)
-            inSuccessHandler(theOperation.JSON);
+            inSuccessHandler(__theOperation.JSON);
         };
 
-    return(theOperation);
+    return(__theOperation);
     }
 	
 - (CURLOperation *)operationToBulkFetchDocuments:(NSArray *)inDocuments options:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
