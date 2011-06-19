@@ -3,7 +3,7 @@
 //  CouchpadAdministrator
 //
 //  Created by Marty Schoch on 6/18/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Marty Schoch.
 //
 
 #import <Foundation/Foundation.h>
