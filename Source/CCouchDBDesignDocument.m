@@ -16,6 +16,8 @@
 #import "CCouchDBSession.h"
 #import "CCouchDBURLOperation.h"
 #import "CouchDBClientConstants.h"
+#import "CCouchDBView.h"
+#import "CCouchDBViewRow.h"
 
 @interface CCouchDBDesignDocument ()
 @property (readonly, nonatomic, retain) CCouchDBSession *session;
@@ -80,7 +82,48 @@
     theRequest.HTTPMethod = @"GET";
 	[theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
     CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
-    theOperation.successHandler = inSuccessHandler;
+    theOperation.successHandler = ^(id inParameter) {
+        CCouchDBView *theView = [[CCouchDBView alloc] init];
+        [theView setTotalRows:[(NSNumber *)[inParameter objectForKey:@"total_rows"] intValue]];
+        [theView setOffset:[(NSNumber *)[inParameter objectForKey:@"offset"] intValue]];        
+		NSMutableArray *theViewRows = [NSMutableArray array];
+		for (NSDictionary *theRow in [inParameter objectForKey:@"rows"])
+        {
+            CCouchDBViewRow *viewRow = [[[CCouchDBViewRow alloc] init] autorelease];
+            id key = [theRow objectForKey:@"key"];
+            if(key)
+            {
+                [viewRow setKey:key];
+            }
+            id value = [theRow objectForKey:@"value"];
+            if(value) 
+            {
+                [viewRow setValue:value];
+            }
+            
+			NSDictionary *doc = [theRow objectForKey:@"doc"];
+			if (doc)
+            {
+				CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:database] autorelease];
+				[theDocument populateWithJSON:doc];
+                
+				[viewRow setDoc:theDocument];
+            }
+			else
+            {
+				NSString *theIdentifier = [theRow objectForKey:@"id"];
+                
+				CCouchDBDocument *theDocument = [[[CCouchDBDocument alloc] initWithDatabase:database identifier:theIdentifier] autorelease];
+                
+				[viewRow setDoc:theDocument];
+            }
+            [theViewRows addObject:viewRow];
+        }
+        
+        [theView setRows:theViewRows];        
+        if (inSuccessHandler)
+			inSuccessHandler(theView);
+    };
     theOperation.failureHandler = inFailureHandler;
 
 	return(theOperation);
