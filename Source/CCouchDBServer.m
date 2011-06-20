@@ -227,6 +227,18 @@
 	return(theOperation);
 	}
 
+- (CURLOperation *)operationToFetchSessionWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+    {
+    NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_session"];
+    NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
+    theRequest.HTTPMethod = @"GET";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;    
+    theOperation.failureHandler = inFailureHandler;
+    return(theOperation);
+    }
+
 - (CURLOperation *)operationToFetchConfigurationWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler 
     {
     NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_config"];
