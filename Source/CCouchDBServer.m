@@ -16,6 +16,7 @@
 #import "CCouchDBURLOperation.h"
 #import "NSData_Base64Extensions.h"
 #import "CFilteringJSONSerializer.h"
+#import "NSURL_Extensions.h"
 	
 @interface CCouchDBServer ()
 @property (readonly, retain) NSMutableDictionary *databasesByName;
@@ -283,5 +284,46 @@
     theOperation.failureHandler = inFailureHandler;
     return(theOperation);     
     }
+
+- (CURLOperation *)operationToRestartServerWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+{
+    NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_restart"];
+    NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
+    theRequest.HTTPMethod = @"POST";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Content-Type"];
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;    
+    theOperation.failureHandler = inFailureHandler;
+    return(theOperation);
+}
+
+- (CURLOperation *)operationToFetchActiveTasksWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+{
+    NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_active_tasks"];
+    NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
+    theRequest.HTTPMethod = @"GET";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;    
+    theOperation.failureHandler = inFailureHandler;
+    return(theOperation);
+}
+
+- (CURLOperation *)operationToFetchStatsWithOptions:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+{
+    NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_stats"];
+    if (inOptions.count > 0)
+    {
+		theURL = [NSURL URLWithRoot:theURL queryDictionary:inOptions];
+    }
+    NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
+    theRequest.HTTPMethod = @"GET";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;    
+    theOperation.failureHandler = inFailureHandler;
+    return(theOperation);
+}
 
 @end
