@@ -284,4 +284,26 @@
     return(theOperation);     
     }
 
+- (CURLOperation *)operationToTriggerReplicationFromSource:(NSString *)inSource toTarget:(NSString *)inTarget withOptions:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+{
+    NSURL *theURL = [self.URL URLByAppendingPathComponent:@"_replicate"];
+    NSMutableDictionary *replicationSettings = [[[NSMutableDictionary alloc] initWithObjectsAndKeys:inSource, @"source", inTarget, @"target", nil] autorelease];
+    if (inOptions.count > 0)
+    {
+		[replicationSettings addEntriesFromDictionary:inOptions];
+    }
+    NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
+    theRequest.HTTPMethod = @"POST";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    
+    NSData *theData = [self.session.serializer serializeObject:replicationSettings error:NULL];
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Content-Type"];
+    [theRequest setHTTPBody:theData];    
+    
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;    
+    theOperation.failureHandler = inFailureHandler;
+    return(theOperation);
+}
+
 @end

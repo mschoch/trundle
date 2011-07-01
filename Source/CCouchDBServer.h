@@ -43,4 +43,6 @@
 - (CURLOperation *)operationToUpdateConfigurationKey:(NSString *)inConfigurationKey inSection:(NSString*)inConfigurationSection withValue:(id)inConfigurationValue withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 - (CURLOperation *)operationToDeleteConfigurationKey:(NSString *)inConfigurationKey inSection:(NSString*)inConfigurationSection withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 
+- (CURLOperation *)operationToTriggerReplicationFromSource:(NSString *)inSource toTarget:(NSString *)inTarget withOptions:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
+
 @end
