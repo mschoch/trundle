@@ -49,4 +49,6 @@
 
 - (CURLOperation *)operationToFetchStatsWithOptions:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
 
+- (CURLOperation *)operationToTriggerReplicationFromSource:(NSString *)inSource toTarget:(NSString *)inTarget withOptions:(NSDictionary *)inOptions successHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler;
+
 @end
