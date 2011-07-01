@@ -373,7 +373,7 @@
 	
 	CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
 	theOperation.successHandler = ^(id inParameter) {
-        CCouchDBView *theView = [[CCouchDBView alloc] init];
+        CCouchDBView *theView = [[[CCouchDBView alloc] init] autorelease];
         [theView setTotalRows:[(NSNumber *)[inParameter objectForKey:@"total_rows"] intValue]];
         [theView setOffset:[(NSNumber *)[inParameter objectForKey:@"offset"] intValue]];        
 		NSMutableArray *theViewRows = [NSMutableArray array];
