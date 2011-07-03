@@ -182,7 +182,7 @@ return(self);
 
 - (NSURL *)URL
     {
-    return([self.database.URL URLByAppendingPathComponent:self.encodedIdentifier]);
+    return([self.database.URL URLByAppendingPathComponent:self.identifier]);
     }
 
 #pragma mark -
