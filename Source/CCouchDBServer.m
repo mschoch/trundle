@@ -348,5 +348,15 @@
     return(theOperation);
 }
 
+- (CURLOperation *)operationToFetchVersionWithSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+{
+    NSMutableURLRequest *theRequest = [self requestWithURL:self.URL];
+    theRequest.HTTPMethod = @"GET";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;    
+    theOperation.failureHandler = inFailureHandler;
+    return(theOperation);
+}
 
 @end
