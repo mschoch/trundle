@@ -253,6 +253,20 @@
     return(theOperation);        
     }
 
+- (CURLOperation *)operationToFetchConfigurationForKey:(NSString*)inConfigurationKey inSection:(NSString*)inConfigurationSection withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler
+{
+    NSString *thePath = [NSString stringWithFormat:@"_config/%@/%@", inConfigurationSection, inConfigurationKey];
+    NSURL *theURL = [self.URL URLByAppendingPathComponent:thePath];
+    NSMutableURLRequest *theRequest = [self requestWithURL:theURL];
+    theRequest.HTTPMethod = @"GET";
+    [theRequest setValue:kContentTypeJSON forHTTPHeaderField:@"Accept"];
+    
+    CCouchDBURLOperation *theOperation = [self.session URLOperationWithRequest:theRequest];
+    theOperation.successHandler = inSuccessHandler;
+    theOperation.failureHandler = inFailureHandler;    
+    return(theOperation);
+}
+
 - (CURLOperation *)operationToUpdateConfigurationKey:(NSString *)inConfigurationKey inSection:(NSString*)inConfigurationSection withValue:(id)inConfigurationValue withSuccessHandler:(CouchDBSuccessHandler)inSuccessHandler failureHandler:(CouchDBFailureHandler)inFailureHandler 
     {
     NSString *thePath = [NSString stringWithFormat:@"_config/%@/%@", inConfigurationSection, inConfigurationKey];
